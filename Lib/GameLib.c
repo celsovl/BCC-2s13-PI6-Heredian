@@ -332,7 +332,7 @@ void gdp_statuschar(Char *tchar){
 }
 
 void gdp_configinfo(Info *tinfo){
-	tinfo->fonte = al_load_font("Fonts//font_info.TTF", 12, 0);
+	tinfo->fonte = al_load_font("Fonts//font_info.ttf", 12, 0);
 	tinfo->h = 100;
 	tinfo->w = wigth;
 	tinfo->color = al_map_rgb(255,255,255);
