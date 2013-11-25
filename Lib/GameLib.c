@@ -254,10 +254,10 @@ void gdp_fadeout(ALLEGRO_BITMAP *image, int velocidade){
 }
 
 int gdp_colision(Object *tobj,Action *act){
-    if(tobj->y+ act->rebatey < 0)
+    if(tobj->y < 0)
 		return(true);
 
-	if((tobj->y+ act->rebatey+ (tobj->hd)) > height)
+	if((tobj->y+ (tobj->hd)) > height)
 		return(true);
 
 	ALLEGRO_COLOR color,colorwall;

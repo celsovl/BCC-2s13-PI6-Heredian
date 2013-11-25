@@ -17,9 +17,9 @@ int main(int argc, char **argv)
     // inicia o timer
     gdp_timer();
     // exibe splash
-    //gdp_splash();
+    gdp_splash();
     // intro
-    //gdp_intro();
+    gdp_intro();
 
     // se fechou a tela não faz nada
     if(nclose_game==0){

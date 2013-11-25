@@ -1,6 +1,6 @@
 #CC=g++
-#CFLAGS= -g -ansi -Wall
-CFLAGS= -g -Wall
+#CFLAGS= -g -ansi
+CFLAGS= -g
 LDFLAGS= `pkg-config --libs allegro_image-5 allegro_acodec-5 allegro_ttf-5 allegro_primitives-5` -pthread 
 
 MYLIBPREFIX = ../Lib
