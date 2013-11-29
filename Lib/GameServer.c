@@ -139,17 +139,56 @@ void *gdp_send2server(ALLEGRO_THREAD *th, void *arg) {
             char_loc->totlifeless = listchars[nlocchar]->totlifeless;
 
             for(i=0;i<MAXCHARLIFELESS;i++){
-                if(listchars[nlocchar]->listlifeless[i] == NULL)
-                    continue;
-
-                if(listchars[nlocchar]->listlifeless[i]->dead==0){
-                    char_loc->listlifeless[i].x = listchars[nlocchar]->listlifeless[i]->obj.x;
-                    char_loc->listlifeless[i].y = listchars[nlocchar]->listlifeless[i]->obj.y;
-                    char_loc->listlifeless[i].w = listchars[nlocchar]->listlifeless[i]->obj.wd;
-                    char_loc->listlifeless[i].h = listchars[nlocchar]->listlifeless[i]->obj.hd;
-                    char_loc->listlifeless[i].d = listchars[nlocchar]->listlifeless[i]->obj.d;
-                    char_loc->listlifeless[i].damage = listchars[nlocchar]->listlifeless[i]->act[listchars[nlocchar]->listlifeless[i]->obj.a].damage;
+                if(listchars[nlocchar]->listlifeless[i] != NULL){
+                    if(listchars[nlocchar]->listlifeless[i]->dead==0){
+                        char_loc->listlifeless[i].x = listchars[nlocchar]->listlifeless[i]->obj.x;
+                        char_loc->listlifeless[i].y = listchars[nlocchar]->listlifeless[i]->obj.y;
+                        char_loc->listlifeless[i].w = listchars[nlocchar]->listlifeless[i]->obj.wd;
+                        char_loc->listlifeless[i].h = listchars[nlocchar]->listlifeless[i]->obj.hd;
+                        char_loc->listlifeless[i].d = listchars[nlocchar]->listlifeless[i]->obj.d;
+                        char_loc->listlifeless[i].damage = listchars[nlocchar]->listlifeless[i]->act[listchars[nlocchar]->listlifeless[i]->obj.a].damage;
+                    }
                 }
+            }
+
+            gdp_client_send(
+                client,
+                (char*)char_loc,
+                sizeof(PacketCharInfo));
+
+            // engenharia de emergencia
+            int boss=boss_char_id;
+
+
+            if(listchars[boss]!=NULL){
+            char_loc->idchar    = boss;
+            char_loc->a         = listchars[boss]->obj.a;
+            char_loc->d         = listchars[boss]->obj.d;
+            char_loc->x         = listchars[boss]->obj.x + listchars[boss]->act[char_loc->a].rebatex;
+            char_loc->w         = listchars[boss]->obj.wd - listchars[boss]->act[char_loc->a].rebatex;
+            char_loc->y         = listchars[boss]->obj.y  + listchars[boss]->act[char_loc->a].rebatey;
+            char_loc->h         = listchars[boss]->obj.hd - listchars[boss]->act[char_loc->a].rebatey;
+            char_loc->healt     = listchars[boss]->info->healt;
+            char_loc->stamina   = listchars[boss]->info->stamina;
+            char_loc->damage    = listchars[boss]->act[char_loc->a].damage;
+            char_loc->exit      = 0;
+
+            char_loc->idmap     =  listchars[boss]->idmap;
+            char_loc->totlifeless = listchars[boss]->totlifeless;
+
+            for(i=0;i<MAXCHARLIFELESS;i++){
+                if(listchars[boss]->listlifeless[i] != NULL){
+
+                    if(listchars[boss]->listlifeless[i]->dead==0){
+                        char_loc->listlifeless[i].x = listchars[boss]->listlifeless[i]->obj.x;
+                        char_loc->listlifeless[i].y = listchars[boss]->listlifeless[i]->obj.y;
+                        char_loc->listlifeless[i].w = listchars[boss]->listlifeless[i]->obj.wd;
+                        char_loc->listlifeless[i].h = listchars[boss]->listlifeless[i]->obj.hd;
+                        char_loc->listlifeless[i].d = listchars[boss]->listlifeless[i]->obj.d;
+                        char_loc->listlifeless[i].damage = listchars[boss]->listlifeless[i]->act[listchars[boss]->listlifeless[i]->obj.a].damage;
+                    }
+                }
+            }
             }
 
             gdp_client_send(

@@ -611,6 +611,12 @@ void gdp_dirdamage(PacketCharInfo *tchar,PacketCharInfo *tchardam){
     wm = x+(int)tchar->w/2;
     hm = y+(int)tchar->h/2;
 
+    int probability = rand()%10+1;
+    if (probability<5)
+    {
+        return;
+    }
+
     switch(d){
         case GDPUP:
             gdp_hit(wm,

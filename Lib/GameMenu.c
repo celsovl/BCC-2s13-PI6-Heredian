@@ -4,7 +4,7 @@
 
 void gdp_intro(){
     ALLEGRO_BITMAP *image   = NULL;
-    ALLEGRO_FONT *fonte     = al_load_font(".//Fonts//font_intro.ttf", 20, 0);
+    ALLEGRO_FONT *fonte     = al_load_font(".//Fonts//font_intro.TTF", 20, 0);
     // musica de fundo
     ALLEGRO_SAMPLE *music   = al_load_sample(".//Songs//Intro//intro_music.ogg");
     al_play_sample(music, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
@@ -81,7 +81,7 @@ void gdp_loaging(){
 void gdp_erro(char *msgerro){
     gdp_clear();
     ALLEGRO_BITMAP *image   = NULL;
-    ALLEGRO_FONT *fonte     = al_load_font(".//Fonts//font_info.ttf", 20, 0);
+    ALLEGRO_FONT *fonte     = al_load_font(".//Fonts//font_info.TTF", 20, 0);
 
     al_draw_textf(fonte, al_map_rgb(255, 255, 255), wigth/2, height/2,ALLEGRO_ALIGN_CENTER, "%s", msgerro);
     al_flip_display();

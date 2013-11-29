@@ -169,6 +169,8 @@ void gdp_load_ambient(int id){
     ambient->id     = id;
     ambient->image  = al_load_bitmap(image);
     ambient->model  = al_load_bitmap(model);
+    al_lock_bitmap(ambient->model, al_get_bitmap_format(ambient->model),ALLEGRO_LOCK_READONLY);
+
     ambient->w      = al_get_bitmap_width(ambient->image);
     ambient->h      = al_get_bitmap_height(ambient->image);
     ambient->wd     = wigth;
@@ -195,6 +197,8 @@ void gdp_load_ambient(int id){
     }
     // inicia a musica do cenario
     al_play_sample(ambient->musicback, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+
+
 }
 
 void gdp_load_gates(char* filename){
