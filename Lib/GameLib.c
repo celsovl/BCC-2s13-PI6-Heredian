@@ -35,6 +35,8 @@ void gdp_init(){
     //inicia addons de primitivas
     al_init_primitives_addon();
 
+	al_set_new_display_flags(ALLEGRO_FULLSCREEN);
+
 	// Configura a janela
 	SCREEN = al_create_display(wigth, height);
 	// define o titulo
@@ -74,7 +76,20 @@ int comparar_char(const LayeredObject *a, const LayeredObject *b) {
     return ya - yb;
 }
 
+double sum(double *arr, int len) {
+	int i;
+	double s = 0;
+	for (i = 0; i < len; i++)
+		s += arr[i];
+	return s;
+}
+
 void gdp_game(){
+	int triple_idx = 0;
+	double last = 0, triple[60];
+
+	memset(triple, 0, sizeof(triple));
+
     gdp_send2server_init();
 
     if(connecterro == 1){
@@ -108,6 +123,10 @@ void gdp_game(){
         }
 
         if (gdp_readtime() && al_is_event_queue_empty(event_queue)) {
+			triple[triple_idx] = al_get_time() - last;
+			triple_idx = ++triple_idx % 60;
+			last = al_get_time();
+
 		    if (a != listchars[nlocchar]->obj.a || d != listchars[nlocchar]->obj.d2 ||
 		    	x != listchars[nlocchar]->obj.x || y != listchars[nlocchar]->obj.y) {
 		        al_lock_mutex(musend2server);
@@ -203,6 +222,7 @@ void gdp_game(){
 
             al_use_transform(&camera);
             gdp_drawinfo(ambient->info);
+            al_draw_textf(ambient->info->fonte, al_map_rgb_f(1,1,1), 630, 5, 0, "FPS: %.3f", 60/sum(triple, 60));
             al_flip_display();
         }
     }

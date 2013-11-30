@@ -58,7 +58,7 @@ void gdp_intro(){
     }
 
     free(texto);
-    al_destroy_bitmap(image);
+    //al_destroy_bitmap(image);
     al_destroy_sample(music);
     al_destroy_sample(narrative);
     al_destroy_font(fonte);
@@ -74,7 +74,7 @@ void gdp_loaging(){
     al_draw_textf(fonte, al_map_rgb(255, 255, 255), wigth-120, height-50,ALLEGRO_ALIGN_LEFT, "%s", texto);
     al_flip_display();
 
-    al_destroy_bitmap(image);
+    //al_destroy_bitmap(image);
     al_destroy_font(fonte);
 }
 
@@ -98,7 +98,7 @@ void gdp_erro(char *msgerro){
     }
 
     free(msgerro);
-    al_destroy_bitmap(image);
+    //al_destroy_bitmap(image);
     al_destroy_font(fonte);
 }
 void gdp_splash(){
@@ -121,6 +121,7 @@ void gdp_splash(){
             al_destroy_bitmap(image);
             break;
         }
+
         // se precionar qualquer botao
         if(ncond==2){
             al_destroy_bitmap(image);

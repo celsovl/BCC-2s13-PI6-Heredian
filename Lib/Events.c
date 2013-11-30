@@ -28,6 +28,11 @@ bool gdp_readclose(){
         return true;
     }
 
+    if (evento.type == ALLEGRO_EVENT_KEY_DOWN && evento.keyboard.keycode == ALLEGRO_KEY_ESCAPE) {
+		nclose_game = 1;
+		return true;
+    }
+
     return false;
 }
 
@@ -42,7 +47,7 @@ void gdp_runtime(){
 void gdp_readdirection(Object *tobj){
     ALLEGRO_KEYBOARD_STATE state;
     al_get_keyboard_state(&state);
-    
+
     tobj->d2 = 0;
     if (al_key_down(&state, ALLEGRO_KEY_UP)) tobj->d2 |= GDPUP;
     if (al_key_down(&state, ALLEGRO_KEY_DOWN)) tobj->d2 |= GDPDOWN;
