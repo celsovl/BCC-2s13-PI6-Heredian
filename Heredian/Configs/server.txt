@@ -1,2 +1,2 @@
-server=10.135.160.22;
+server=localhost;
 boss_char_id=21;
