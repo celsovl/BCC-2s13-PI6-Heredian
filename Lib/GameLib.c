@@ -36,8 +36,6 @@ void gdp_init(){
     //inicia addons de primitivas
     al_init_primitives_addon();
 
-	al_set_new_display_flags(ALLEGRO_FULLSCREEN);
-
 	// Configura a janela
 	 al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW|ALLEGRO_FULLSCREEN);
 	SCREEN = al_create_display(wigth, height);
