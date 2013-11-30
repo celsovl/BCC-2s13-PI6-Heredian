@@ -158,6 +158,7 @@ void gdp_load_ambient(int id){
     sound = gdp_files_quick_getstring(ConfigFile,"sound");
 
     if (ambient != NULL) {
+		al_unlock_bitmap(ambient->image);
 		al_destroy_bitmap(ambient->model);
 		al_destroy_bitmap(ambient->image);
 		al_destroy_sample(ambient->musicback);
@@ -171,6 +172,8 @@ void gdp_load_ambient(int id){
 
     ambient->id     = id;
     ambient->image  = al_load_bitmap(image);
+
+    al_lock_bitmap(ambient->image, al_get_bitmap_format(ambient->image), ALLEGRO_LOCK_READONLY);
 
     ALLEGRO_BITMAP *tmp = al_load_bitmap(model);
     int flags = al_get_new_bitmap_flags();
