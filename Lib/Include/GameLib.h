@@ -36,6 +36,7 @@ int nlocchar;
 int ntotlifeless;
 int connecterro;
 float scale;
+int boss_char_id;
 
 Char **listchars;
 Lifeless **listlifeless;
@@ -68,7 +69,7 @@ void gdp_statuschar(Char *);
 void gdp_drawinfo(Info *tinfo);
 void gdp_configinfo(Info *tinfo);
 void gdp_update_camera(Char *, float , float , float );
-void gdp_valid_ambient_change(Object*);
+void gdp_valid_ambient_change(Object*, Action*);
 int idlifeless();
 
 #endif

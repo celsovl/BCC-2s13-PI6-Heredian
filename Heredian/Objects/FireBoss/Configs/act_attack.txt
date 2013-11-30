@@ -7,5 +7,5 @@ stepx=2;
 stepy=2;
 fps=10;
 sound=NULL;
-damage=10;
+damage=300;
 lock=0;

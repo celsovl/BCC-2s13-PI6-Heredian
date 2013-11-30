@@ -158,7 +158,6 @@ void gdp_load_ambient(int id){
     sound = gdp_files_quick_getstring(ConfigFile,"sound");
 
     if (ambient != NULL) {
-		//al_unlock_bitmap(ambient->model);
 		al_destroy_bitmap(ambient->model);
 		al_destroy_bitmap(ambient->image);
 		al_destroy_sample(ambient->musicback);
@@ -185,8 +184,6 @@ void gdp_load_ambient(int id){
     ambient->wd     = wigth;
     ambient->hd     = height;
 
-    //al_lock_bitmap(ambient->model, al_get_bitmap_format(ambient->model), ALLEGRO_LOCK_READONLY);
-
     ambient->ex     = gdp_files_quick_getint(ConfigFile,"ex");
     ambient->ey     = gdp_files_quick_getint(ConfigFile,"ey");
 
@@ -208,6 +205,8 @@ void gdp_load_ambient(int id){
     }
     // inicia a musica do cenario
     al_play_sample(ambient->musicback, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+
+
 }
 
 void gdp_load_gates(char* filename){

@@ -69,14 +69,13 @@ void gdp_drawchar(Char *tchar){
             // se existir alguma magia , cria o objeto
             if(oactions[acao].lifelessid > 0 && oSprite->first == 1 && tchar->totlifeless<MAXCHARLIFELESS){
                 int id = idlifeless();
-                if(listlifeless[id]!=NULL)
-                    free(listlifeless[id]);
+
                 listlifeless[id] = malloc(sizeof(Lifeless));
 
                 gdp_load_Lifeless(oactions[acao].lifelessid, listlifeless[id]);
                 ntotlifeless++;
 
-                listlifeless[id]->dead = 0;
+                listlifeless[id]->dead       = 0;
                 listlifeless[id]->obj.idchar = tchar->obj.id;
                 listlifeless[id]->obj.id     = id;
                 listlifeless[id]->idmap      = opmap;

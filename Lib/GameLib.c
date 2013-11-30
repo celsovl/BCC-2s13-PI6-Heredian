@@ -12,7 +12,8 @@ void gdp_init(){
     ntotchars    = 4; // numero de personagens
     ntotenemies  = 0; // numero de inimigos
     opmap        = 1; // mapa escolhido
-    scale        = 1.5;
+    scale        = 1.5; //escala do mapa
+    boss_char_id = gdp_files_quick_getint("Configs//server.txt","boss_char_id"); //id do boss
 
 	// Inicializa a Allegro
 	al_init();
@@ -38,6 +39,7 @@ void gdp_init(){
 	al_set_new_display_flags(ALLEGRO_FULLSCREEN);
 
 	// Configura a janela
+	 al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW|ALLEGRO_FULLSCREEN);
 	SCREEN = al_create_display(wigth, height);
 	// define o titulo
 	al_set_window_title(SCREEN, title);
@@ -337,7 +339,7 @@ void gdp_movsprite(Object *tobj,Action *tact){
 
     if(tobj->id == nlocchar && tobj->type == 1){
         // valida troca de mapa
-        gdp_valid_ambient_change(tobj);
+        gdp_valid_ambient_change(tobj,tact);
     }
 }
 
@@ -352,7 +354,7 @@ void gdp_statuschar(Char *tchar){
 }
 
 void gdp_configinfo(Info *tinfo){
-	tinfo->fonte = al_load_font("Fonts//font_info.ttf", 12, 0);
+	tinfo->fonte = al_load_font("Fonts//font_info.TTF", 12, 0);
 	tinfo->h = 100;
 	tinfo->w = wigth;
 	tinfo->color = al_map_rgb(255,255,255);
@@ -392,18 +394,26 @@ void gdp_update_camera(Char *tchar, float theight, float twidth, float tscale)
      al_use_transform(&camera);
 }
 
-void gdp_valid_ambient_change(Object *tobj)
+void gdp_valid_ambient_change(Object *tobj, Action *tact)
 {
-    int n;
+    int n,x,y,w,h;
+    x = tobj->x; //+ tact->rebatex;
+    y = tobj->y; //+ tact->rebatey;
+    w = tobj->wd; //- tact->rebatex;
+    h = tobj->hd; // - tact->rebatey;
+
+
+
       //valida se passou por alguma porta
     for (n=0; n<(ambient->qt_gates);n++)
     {
         Gate oGate = ambient->gates[n];
-        if (   (tobj->x + tobj->wd ) >= (oGate.x1)
-            && (tobj->x )  <= (oGate.x2)
-            && (tobj->y + tobj->hd)  >= (oGate.y1)
-            && (tobj->y + tobj->hd)  <= (oGate.y2))
+        if (   (x + w ) >= (oGate.x1)
+            && (x )  <= (oGate.x2)
+            && (y + h)  >= (oGate.y1)
+            && (y + h)  <= (oGate.y2))
         {
+
             // passou pelo portao
             tobj->x     = (ambient->gates[n].ex);
             tobj->y     = (ambient->gates[n].ey);
